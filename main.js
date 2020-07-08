@@ -1,8 +1,8 @@
 var text_options = [
     "Software Developer.",
-    "Innovator.",
     "Coding Instructor.",
-    "Interest In Medical Sciences."
+    "Innovator.",
+    "Interested In Medical Sciences."
 ]
 var text_option = 0;
 var changing_text_element;
