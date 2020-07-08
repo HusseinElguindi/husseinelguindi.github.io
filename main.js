@@ -57,7 +57,7 @@ function write_changing_text() {
         changing_text_element.innerHTML += text_options[text_option][changing_text_element.innerHTML.length];
     }
     else if (write_mode == write_modes.reading) {
-        if (read_delay >= 2500){
+        if (read_delay >= 2000){
             write_mode = write_modes.erase;
         }
     }
