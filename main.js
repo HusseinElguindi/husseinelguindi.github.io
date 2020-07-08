@@ -9,6 +9,8 @@ var changing_text_element;
 var read_delay = 0;
 var time_interval = 100; //ms
 
+var carat_delay;
+
 const write_modes = {
     write: 0,
     erase: 1,
