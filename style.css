@@ -29,7 +29,7 @@ body {
     margin: 0;
     padding: 0;
     padding-top: 10px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 
@@ -55,4 +55,28 @@ body {
     font-weight: 600;
 }
 
+.outline_btn {
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+    /* border-radius: 30px; */
+    /* margin-top: 30px; */
+    padding: 13px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
 
+    -webkit-transition-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    -webkit-transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    transition-duration: 0.2s;
+}
+
+.outline_btn:hover {
+    background-color: white;
+    color: black;
+}
+
+a {
+    margin-top: 30px;
+}
