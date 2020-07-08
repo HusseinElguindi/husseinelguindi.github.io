@@ -34,6 +34,7 @@ body {
 
 
 #main_title_container {
+    margin-top: 40px;
     display: inline-flex;
     flex-wrap: wrap;
 
@@ -81,9 +82,9 @@ body {
 
 /* If the screen size is 601px wide or more */
 @media screen and (min-width: 601px) {
-    .main_title {
+    /* .main_title {
         font-size: 50px;
-    }
+    } */
 
     #main_container p {
         font-size: 18px;
@@ -92,9 +93,9 @@ body {
 
   /* If the screen size is 600px wide or less */
 @media screen and (max-width: 600px) {
-    .main_title {
+    /* .main_title {
         font-size: 40px;
-    }
+    } */
 
     #main_container p {
             font-size: 16px;
