@@ -10,7 +10,15 @@ function setup()
     var cnv = createCanvas(parent.clientWidth, parent.clientHeight);
     cnv.parent("main_container");
 
-    for (let i = 0; i < Math.round(width * height * 0.00009); i++) {
+    let required_particles = Math.round(width * height * 0.00009);
+    if (required_particles > 100) {
+        required_particles = 100;
+    }
+    else if (required_particles < 35) {
+        required_particles = 35;
+    }
+
+    for (let i = 0; i < required_particles; i++) {
         particles.push(new Particle());
     }
 }
@@ -60,6 +68,13 @@ function windowResized()
     resizeCanvas(parent.clientWidth, parent.clientHeight);
 
     let required_particles = Math.round(width * height * 0.00009);
+    if (required_particles > 100) {
+        required_particles = 100;
+    }
+    else if (required_particles < 35) {
+        required_particles = 35;
+    }
+
     if (required_particles < particles.length) {
         particles = particles.splice(0, required_particles);
         // TODO: DO SOMETHING ABOUT PARTICLES BEING OUT OF BOUNDS FOR TOO LONG
