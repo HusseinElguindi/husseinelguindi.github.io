@@ -59,23 +59,17 @@ function windowResized()
 
     resizeCanvas(parent.clientWidth, parent.clientHeight);
 
-
     let required_particles = Math.round(width * height * 0.00009);
-    // console.log(required_particles - particles.length);
-    // console.log(particles.length - required_particles);
-
-    // let iters = required_particles - particles.length;
-    // for (let i = 0; i < iters; i++) {
-    //     particles.();
-    // }
-
     if (required_particles < particles.length) {
         particles = particles.splice(0, required_particles);
+        // TODO: DO SOMETHING ABOUT PARTICLES BEING OUT OF BOUNDS FOR TOO LONG
     }
-
-    let iters = required_particles - particles.length;
-    for (let i = 0; i < iters; i++) {
-        particles.push(new Particle());
+    else {
+        let iters = required_particles - particles.length;
+        for (let i = 0; i < iters; i++) {
+            particles.push(new Particle());
+            // TODO: USE PWIDTH AND PHEIGHT TO CALCULATE THE ARE THAT WAS ENLARGENED AND ADD RANDOM PARTICLES THERE
+        }
     }
 
     console.log(required_particles);
