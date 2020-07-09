@@ -42,6 +42,8 @@ function draw()
         p.show();
     }
 
+    stroke(0, 0, 0, 20);
+    strokeWeight(1);
     for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
 
@@ -49,19 +51,16 @@ function draw()
             let p2 = particles[x];
 
             if (dist(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) <= 110) {
-                stroke(0, 0, 0, 20);
-                strokeWeight(1);
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
             }
         }
 
         if (dist(p.pos.x, p.pos.y, mouseX, mouseY) <= 200) {
-            stroke(0, 0, 0, 20);
-            strokeWeight(1);
             line(p.pos.x, p.pos.y, mouseX, mouseY);
         }
     }
 
+    noStroke();
     textAlign(LEFT, TOP);
     text(frameRate().toFixed(2), 10, 10);
 }
@@ -83,17 +82,44 @@ function windowResized()
 
     if (required_particles < particles.length) {
         particles = particles.splice(0, required_particles);
-        // TODO: DO SOMETHING ABOUT PARTICLES BEING OUT OF BOUNDS FOR TOO LONG
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+
+            if (p.pos.x > width + 11) {
+                if (random() > 0.4) {
+                    p.pos.x = width + 5;
+                }
+                else {
+                    p.pos.x = -5;
+                }
+            }
+            if (p.pos.y > height + 11) {
+                if (random() > 0.4) {
+                    p.pos.y = height + 5;
+                }
+                else {
+                    p.pos.y = -5;
+                }
+            }
+        }
     }
     else {
         let iters = required_particles - particles.length;
-        for (let i = 0; i < iters; i++) {
-            particles.push(new Particle());
-            // TODO: USE PWIDTH AND PHEIGHT TO CALCULATE THE ARE THAT WAS ENLARGENED AND ADD RANDOM PARTICLES THERE
+        for (let i = 0; i < iters;) {
+            if (random() > 0.5) {
+                if (width > pWidth) {
+                    particles.push(new Particle(random(pWidth, width), random(height)));
+                    i++;
+                }
+                if (height > pHeight) {
+                    particles.push(new Particle(random(width), random(pHeight, height)));
+                    i++;
+                }
+            }
+            else {
+                particles.push(new Particle());
+                i++;
+            }
         }
     }
-
-    // console.log(required_particles);
-    // console.log(particles.length);
-    // console.log("\n");
 }
