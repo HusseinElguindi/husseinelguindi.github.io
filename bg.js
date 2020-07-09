@@ -41,7 +41,7 @@ function draw()
             let p2 = particles[x];
 
             if (dist(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) < 110) {
-                stroke(0, 0, 0, 10);
+                stroke(0, 0, 0, 20);
                 strokeWeight(1);
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
             }
@@ -72,7 +72,7 @@ function windowResized()
         }
     }
 
-    console.log(required_particles);
-    console.log(particles.length);
-    console.log("\n");
+    // console.log(required_particles);
+    // console.log(particles.length);
+    // console.log("\n");
 }
