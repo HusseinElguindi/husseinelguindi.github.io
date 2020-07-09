@@ -48,14 +48,15 @@ function draw()
         for (let x = 0; x < particles.length; x++) {
             let p2 = particles[x];
 
-            if (dist(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) < 110) {
-                stroke(0, 0, 0, 15);
+            if (dist(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) <= 110) {
+                stroke(0, 0, 0, 20);
                 strokeWeight(1);
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
             }
         }
-        if (dist(p.pos.x, p.pos.y, mouseX, mouseY) < 150) {
-            stroke(0, 0, 0, 15);
+
+        if (dist(p.pos.x, p.pos.y, mouseX, mouseY) <= 200) {
+            stroke(0, 0, 0, 20);
             strokeWeight(1);
             line(p.pos.x, p.pos.y, mouseX, mouseY);
         }
