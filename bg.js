@@ -60,9 +60,9 @@ function draw()
         }
     }
 
-//     noStroke();
-//     textAlign(LEFT, TOP);
-//     text(frameRate().toFixed(2), 10, 10);
+    noStroke();
+    textAlign(LEFT, TOP);
+    text(frameRate().toFixed(2), 10, 10);
 }
 
 function windowResized()
@@ -82,26 +82,6 @@ function windowResized()
 
     if (required_particles < particles.length) {
         particles = particles.splice(0, required_particles);
-        for (let i = 0; i < particles.length; i++) {
-            let p = particles[i];
-
-            if (p.pos.x > width + 11) {
-                if (random() > 0.4) {
-                    p.pos.x = width + 5;
-                }
-                else {
-                    p.pos.x = -5;
-                }
-            }
-            if (p.pos.y > height + 11) {
-                if (random() > 0.4) {
-                    p.pos.y = height + 5;
-                }
-                else {
-                    p.pos.y = -5;
-                }
-            }
-        }
     }
     else {
         let iters = required_particles - particles.length;
@@ -119,6 +99,27 @@ function windowResized()
             else {
                 particles.push(new Particle());
                 i++;
+            }
+        }
+    }
+
+    for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+
+        if (p.pos.x > width + 11) {
+            if (random() > 0.4) {
+                p.pos.x = width + 5;
+            }
+            else {
+                p.pos.x = -5;
+            }
+        }
+        if (p.pos.y > height + 11) {
+            if (random() > 0.4) {
+                p.pos.y = height + 5;
+            }
+            else {
+                p.pos.y = -5;
             }
         }
     }
