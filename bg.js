@@ -60,9 +60,9 @@ function draw()
         }
     }
 
-    noStroke();
-    textAlign(LEFT, TOP);
-    text(frameRate().toFixed(2), 10, 10);
+//     noStroke();
+//     textAlign(LEFT, TOP);
+//     text(frameRate().toFixed(2), 10, 10);
 }
 
 function windowResized()
