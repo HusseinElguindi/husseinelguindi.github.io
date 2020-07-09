@@ -49,7 +49,7 @@ function draw()
             let p2 = particles[x];
 
             if (dist(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) < 110) {
-                stroke(0, 0, 0, 20);
+                stroke(0, 0, 0, 15);
                 strokeWeight(1);
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
             }
