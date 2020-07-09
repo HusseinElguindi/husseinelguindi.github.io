@@ -54,6 +54,11 @@ function draw()
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
             }
         }
+        if (dist(p.pos.x, p.pos.y, mouseX, mouseY)) {
+            stroke(0, 0, 0, 15);
+            strokeWeight(1);
+            line(p.pos.x, p.pos.y, mouseX, mouseY);
+        }
     }
 
     textAlign(LEFT, TOP);
