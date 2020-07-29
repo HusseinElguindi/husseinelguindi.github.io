@@ -106,3 +106,35 @@ body {
     left: 0;
     z-index: -100;
 }
+
+
+.fa {
+    margin: 0;
+    padding: 0 5px;
+    /* padding: 10px;*/
+    font-size: 30px;
+    /* width: 30px;
+    height: 30px; */
+    text-align: center;
+    text-decoration: none;
+    /* margin: 5px 2px; */
+    /* border-radius: 50%; */
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-github {
+    /* background: white; */
+    color: black;
+}
+
+.fa-linkedin {
+    /* background: white; */
+    color: black;
+}
+
+.fa:visited {
+    color: black;
+}
