@@ -17,7 +17,7 @@ function setup()
     else if (required_particles < 25) {
         required_particles = 25;
     }
-    required_particles = 250;
+    required_particles = 300;
 
     for (let i = 0; i < required_particles; i++) {
         particles.push(new Particle());
@@ -69,9 +69,9 @@ function draw()
         }
     }
 
-    // noStroke();
-    // textAlign(LEFT, TOP);
-    // text(frameRate().toFixed(2), 10, 10);
+    noStroke();
+    textAlign(LEFT, TOP);
+    text(frameRate().toFixed(2), 10, 10);
 }
 
 function distsq2D(x1, y1, x2, y2) {
