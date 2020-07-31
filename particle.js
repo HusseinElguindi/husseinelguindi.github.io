@@ -29,8 +29,8 @@ class Particle
 
     show()
     {
-        noStroke();
-        fill(0);
+        // noStroke();
+        // fill(0);
         ellipse(this.pos.x, this.pos.y, this.diameter);
     }
 }
