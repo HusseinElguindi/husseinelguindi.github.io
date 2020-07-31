@@ -27,6 +27,8 @@ function draw()
 {
     clear();
 
+    noStroke();
+    fill(0);
     for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
 
