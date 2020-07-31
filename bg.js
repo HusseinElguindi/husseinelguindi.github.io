@@ -29,8 +29,9 @@ function draw()
 
     noStroke();
     fill(0);
+    var p;
     for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
+        p = particles[i];
 
         if (p.pos.x - 10 > width || p.pos.x + 10 < 0) {
             p.vel.x *= -1;
@@ -46,11 +47,16 @@ function draw()
 
     stroke(0, 0, 0, 20);
     strokeWeight(1);
+    var p2;
     for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
+        p = particles[i];
 
         for (let x = 0; x < particles.length; x++) {
-            let p2 = particles[x];
+            if (x === i) {
+                continue;
+            }
+
+            p2 = particles[x];
 
             if (distsq2D(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) <= 12100) {
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
