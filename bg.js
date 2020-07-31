@@ -10,12 +10,12 @@ function setup()
     var cnv = createCanvas(parent.clientWidth, parent.clientHeight);
     cnv.parent("main_container");
 
-    let required_particles = Math.round(width * height * 0.00009);
-    if (required_particles > 100) {
-        required_particles = 100;
+    let required_particles = Math.round(width * height * 0.00009) - 10;
+    if (required_particles > 90) {
+        required_particles = 90;
     }
-    else if (required_particles < 35) {
-        required_particles = 35;
+    else if (required_particles < 25) {
+        required_particles = 25;
     }
 
     for (let i = 0; i < required_particles; i++) {
@@ -72,12 +72,12 @@ function windowResized()
 
     resizeCanvas(parent.clientWidth, parent.clientHeight);
 
-    let required_particles = Math.round(width * height * 0.00009);
-    if (required_particles > 100) {
-        required_particles = 100;
+    let required_particles = Math.round(width * height * 0.00009) - 10;
+    if (required_particles > 90) {
+        required_particles = 90;
     }
-    else if (required_particles < 35) {
-        required_particles = 35;
+    else if (required_particles < 25) {
+        required_particles = 25;
     }
 
     if (required_particles < particles.length) {
