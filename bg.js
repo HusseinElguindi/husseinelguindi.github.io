@@ -50,12 +50,12 @@ function draw()
         for (let x = 0; x < particles.length; x++) {
             let p2 = particles[x];
 
-            if (dist(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) <= 110) {
+            if (distsq2D(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y) <= 12100) {
                 line(p.pos.x, p.pos.y, p2.pos.x, p2.pos.y);
             }
         }
 
-        if (dist(p.pos.x, p.pos.y, mouseX, mouseY) <= 200) {
+        if (distsq2D(p.pos.x, p.pos.y, mouseX, mouseY) <= 40000) {
             line(p.pos.x, p.pos.y, mouseX, mouseY);
         }
     }
@@ -63,6 +63,10 @@ function draw()
     // noStroke();
     // textAlign(LEFT, TOP);
     // text(frameRate().toFixed(2), 10, 10);
+}
+
+function distsq2D(x1, y1, x2, y2) {
+   return sq(x1 - x2) + sq(y1 - y2);
 }
 
 function windowResized()
