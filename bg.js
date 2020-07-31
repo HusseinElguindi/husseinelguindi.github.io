@@ -17,6 +17,7 @@ function setup()
     else if (required_particles < 25) {
         required_particles = 25;
     }
+    required_particles = 150;
 
     for (let i = 0; i < required_particles; i++) {
         particles.push(new Particle());
