@@ -77,7 +77,7 @@ var textMesh;
 loader.load('montserrat2.typeface.json', function ( font ) {
 	var geometry = new THREE.TextGeometry('HUSSEIN', {
 		font: font,
-		size: 30,
+		size: remap(window.innerWidth, 0, 1920, 0, 30),
 		height: 20,
 		curveSegments: 12,
 		bevelEnabled: false
@@ -93,7 +93,7 @@ loader.load('montserrat2.typeface.json', function ( font ) {
 
     geometry = new THREE.TextGeometry('ELGUINDI', {
 		font: font,
-		size: 30,
+		size: remap(window.innerWidth, 0, 1920, 0, 30),
 		height: 20,
 		curveSegments: 12,
 		bevelEnabled: false
