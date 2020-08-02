@@ -1,0 +1,16 @@
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* overflow-y: scroll; */
+}
+
+body, canvas {
+    margin: 0;
+    padding: 0;
+}
+
+body canvas {
+    width: 100vw;
+    height: 100vh;
+}
+
