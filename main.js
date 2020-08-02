@@ -55,6 +55,16 @@ document.onmousemove = function(e){
 // scene.add( circle );
 
 
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
 
 function remap(value, from1, to1, from2, to2)
 {
