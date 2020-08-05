@@ -70,11 +70,11 @@ body {
 #navBar li {
     margin: 0;
     padding: 0;
-    height: 50px;
+    height: 47px;
 }
 
 #navBar li a {
-    line-height: 50px;
+    line-height: 47px;
     font-weight: 600;
     color: #ffffff;
     padding: 0 2vw;
@@ -83,7 +83,7 @@ body {
 }
 
 .navSelected {
-    border-bottom: 4px solid #ff0000;
+    border-bottom: 3px solid #ff0000;
 }
 
 .fullSizePanel {
