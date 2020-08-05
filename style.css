@@ -83,8 +83,7 @@ body {
 }
 
 .navSelected {
-    /* border-top: 2px solid #ffffff; */
-    background: rgb(255, 255, 255, 0.2);
+    border-bottom: 2px solid #ff0000;
 }
 
 .fullSizePanel {
