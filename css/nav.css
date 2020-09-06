@@ -1,0 +1,33 @@
+.nav-link {
+    color: black;
+}
+
+.nav-item .active {
+    color: black;
+}
+
+.nav {
+    position: fixed;
+    right: 15px;
+    top: 10px;
+    /* width: max-content; */
+    width: fit-content;
+    text-align: center;
+}
+
+.nav-link {
+    padding: 8px 1vw;
+}
+
+.nav_center .nav-link {
+    padding: 8px 2vw;
+}
+
+.nav_center {
+    right: 50%;
+    transform: translate(50%, 0);
+}
+
+.nav-bar {
+    width: 100%;
+}

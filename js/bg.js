@@ -11,7 +11,8 @@ var particle_link_dist;
 
 function setup()
 {
-    console.log(mouse_link_dist);
+    pixelDensity(1);
+
     parent = document.getElementById("main_container");
     var cnv = createCanvas(parent.clientWidth, parent.clientHeight);
     cnv.parent("main_container");
@@ -60,7 +61,7 @@ function draw()
     }
 
     stroke(0, 0, 0, 20);
-    strokeWeight(1);
+    strokeWeight(0.5);
     for (let i = 0; i < particles.length; i++) {
         p = particles[i];
 
