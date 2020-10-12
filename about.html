@@ -17,32 +17,35 @@
         <link rel="stylesheet" type="text/css" href="css/about.css">
         <link rel="stylesheet" type="text/css" href="css/nav.css">
         <link rel="stylesheet" type="text/css" href="css/animations.css">
+        <link rel="stylesheet" type="text/css" href="css/header.css">
     </head>
 
     <body>
         <script src="js/main.js"></script>
 
-        <div id="nav-bar" class="unselectable">
+        <div id="header">
             <div id="main-title-container">
                 <h1 class="main-title unselectable">HUSSEIN</h1>
                 <h1 class="main-title unselectable"><span>ELGUINDI</span></h1>
             </div>
+
+            <a id="nav-btn" href="javascript:void(0);" onclick="nav_click();" class="nav-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </a>
+        </div>
+        <div id="nav-overlay">
+            <ul id="nav-list">
+                <li><a class="active" aria-disabled="true" tabindex="-1" href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
 
-        <ul id="navbar" class="nav unselectable" style="z-index: 150;">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-disabled="true" tabindex="-1" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Projects</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-        </ul>
 
         <div id="main_container" class="fade-in-bottom">
 

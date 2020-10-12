@@ -60,7 +60,7 @@ function draw()
         p.show();
     }
 
-    stroke(0, 0, 0, 20);
+    stroke(0, 0, 0, 35);
     strokeWeight(0.5);
     for (let i = 0; i < particles.length; i++) {
         p = particles[i];

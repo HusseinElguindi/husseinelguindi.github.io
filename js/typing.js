@@ -18,7 +18,7 @@ const write_modes = {
 };
 var write_mode = write_modes.reading;
 
-window.onload = (event) => {
+window.onload = () => {
     changing_text_element = document.getElementById("changing_text");
     changing_text_element.innerHTML = text_options[text_option];
 };
