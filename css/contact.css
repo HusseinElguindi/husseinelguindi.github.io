@@ -1,0 +1,40 @@
+html, body {
+    overflow: hidden;
+}
+
+#main-container {
+    width: 100%;
+    height: calc(100vh - 70px - 66px - 120px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 21px;
+    margin: 0;
+}
+
+.page-title {
+    font-size: 30px;
+    font-weight: 600;
+
+    margin: 15px 0 15px 0;
+    padding: 0;
+
+    text-align: center;
+}
+
+#main-container p {
+    padding: 0;
+    margin: 0;
+}
+
+#contact-form-wrapper {
+    max-width: 700px;
+    width: 90%;
+}
+
+#contact-submit {
+
+}

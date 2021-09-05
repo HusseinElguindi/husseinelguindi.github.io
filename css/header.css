@@ -1,0 +1,44 @@
+#header {
+    height: 60px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 0.5px solid rgb(0,0,0,0.4);
+}
+
+#nav-btn {
+    position: relative;
+}
+
+#main-title-container {
+    position: relative;
+}
+
+#nav-overlay {
+    height: calc(100vh - 60px);
+}
+
+.main-title {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1;
+
+    margin: 0;
+    padding: 0 1px;
+}
+
+.main-title span {
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 450px) {
+    .main-title {
+        display: block;
+        font-size: 20px;
+    }
+}
