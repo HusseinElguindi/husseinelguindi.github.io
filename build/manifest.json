@@ -1,0 +1,134 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "_app/immutable/start-adf5e024.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-87ac75c6.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/__layout-reset.svelte",
+      "src/routes/post/__layout@reset.svelte",
+      "src/routes/index.svelte",
+      "src/routes/post/latex-note-calc-i.md",
+      "src/routes/post/p2p-data-webrtc.md"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "_app/immutable/pages/__layout.svelte-8f345f67.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js"
+    ],
+    "css": [
+      "_app/immutable/assets/__layout-e3d9d002.css",
+      "_app/immutable/assets/style-1a6fb466.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "_app/immutable/error.svelte-2e56e10d.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js"
+    ]
+  },
+  "src/routes/__layout-reset.svelte": {
+    "file": "_app/immutable/pages/__layout-reset.svelte-8aec737b.js",
+    "src": "src/routes/__layout-reset.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js"
+    ]
+  },
+  "src/routes/post/__layout@reset.svelte": {
+    "file": "_app/immutable/pages/post/__layout@reset.svelte-a3a9bbe6.js",
+    "src": "src/routes/post/__layout@reset.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js"
+    ],
+    "css": [
+      "_app/immutable/assets/__layout@reset-8f6f3192.css",
+      "_app/immutable/assets/style-1a6fb466.css"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "_app/immutable/pages/index.svelte-ef27ac78.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js"
+    ],
+    "css": [
+      "_app/immutable/assets/index-b38600eb.css"
+    ]
+  },
+  "src/routes/post/latex-note-calc-i.md": {
+    "file": "_app/immutable/pages/post/latex-note-calc-i.md-5ceaeee4.js",
+    "src": "src/routes/post/latex-note-calc-i.md",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js",
+      "__post-6abfe51a.js"
+    ],
+    "css": [
+      "_app/immutable/assets/latex-note-calc-i-b7ac4f86.css"
+    ]
+  },
+  "src/routes/post/p2p-data-webrtc.md": {
+    "file": "_app/immutable/pages/post/p2p-data-webrtc.md-c8e51a66.js",
+    "src": "src/routes/post/p2p-data-webrtc.md",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-87ac75c6.js",
+      "__post-6abfe51a.js"
+    ]
+  },
+  "_index-87ac75c6.js": {
+    "file": "_app/immutable/chunks/index-87ac75c6.js"
+  },
+  "__post-6abfe51a.js": {
+    "file": "_app/immutable/chunks/_post-6abfe51a.js",
+    "imports": [
+      "_index-87ac75c6.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_post-d1fa618f.css"
+    ]
+  },
+  "src/routes/index.css": {
+    "file": "_app/immutable/assets/index-b38600eb.css",
+    "src": "src/routes/index.css"
+  },
+  "style.css": {
+    "file": "_app/immutable/assets/style-1a6fb466.css",
+    "src": "style.css"
+  },
+  "src/routes/__layout.css": {
+    "file": "_app/immutable/assets/__layout-e3d9d002.css",
+    "src": "src/routes/__layout.css"
+  },
+  "src/routes/post/__layout@reset.css": {
+    "file": "_app/immutable/assets/__layout@reset-8f6f3192.css",
+    "src": "src/routes/post/__layout@reset.css"
+  },
+  "_post.css": {
+    "file": "_app/immutable/assets/_post-d1fa618f.css",
+    "src": "_post.css"
+  },
+  "src/routes/post/latex-note-calc-i.css": {
+    "file": "_app/immutable/assets/latex-note-calc-i-b7ac4f86.css",
+    "src": "src/routes/post/latex-note-calc-i.css"
+  }
+}

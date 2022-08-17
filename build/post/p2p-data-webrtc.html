@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+        <!-- <script> mermaid.initialize({ startOnLoad: true }); </script> -->
+
+		<meta http-equiv="content-security-policy" content=""><title>DropNow: Peer to Peer Data Sharing Through WebRTC | Hussein Elguindi</title><meta name="description" content="Quite often we need to transfer files between devices. Unfortunately, even in the modern age of technology, we still have trouble doing this securely and conveniently. We explore the implementation of WebRTC in a web application to enable peer to peer data transfer." data-svelte="svelte-24fe3a">
+	<link rel="stylesheet" href="/_app/immutable/assets/__layout@reset-8f6f3192.css">
+	<link rel="stylesheet" href="/_app/immutable/assets/style-1a6fb466.css">
+	<link rel="stylesheet" href="/_app/immutable/assets/_post-d1fa618f.css">
+	<link rel="modulepreload" href="/_app/immutable/start-adf5e024.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/index-87ac75c6.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/__layout-reset.svelte-8aec737b.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/post/__layout@reset.svelte-a3a9bbe6.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/post/p2p-data-webrtc.md-c8e51a66.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/_post-6abfe51a.js">
+	</head>
+	<body>
+		
+
+
+
+
+<main class="svelte-jpgz15"><div class="svelte-jpgz15"><section class="header svelte-jpgz15"><div class="svelte-jpgz15"><a href="/" class="svelte-jpgz15">◀ all articles</a></div>
+            <div class="svelte-jpgz15">Aug 17, 2022 </div></section>
+
+        <h1 class="title svelte-jpgz15">DropNow: Peer to Peer Data Sharing Through WebRTC</h1>
+
+        <div class="content svelte-jpgz15"><p style="font-style: italic;">Quite often we need to transfer files between devices. Unfortunately, even in the modern age of technology, we still have trouble doing this securely and conveniently. We explore the implementation of WebRTC in a web application to enable peer to peer data transfer.</p>
+            <h2 id="the-problem"><a aria-hidden="true" tabindex="-1" href="#the-problem"><span class="icon icon-link"></span></a>The Problem</h2>
+<p>It is quite often that I find myself needing to transfer files between devices. It usually resolves into sending files through email, a form of social media, or some other untrusted file hosting platform.</p>
+<h2 id="webrtc"><a aria-hidden="true" tabindex="-1" href="#webrtc"><span class="icon icon-link"></span></a>WebRTC</h2>
+<p>WebRTC is an open source project that provides an interface for peer to peer communication between devices. Using WebRTC’s data channels, we can send data completely securely from one peer to another, without a middle man (assuming that a connection is made without a TURN server).</p>
+<p>Using WebRTC, I decided to create <a href="https://dropnow.elguindi.xyz" rel="nofollow">DropNow</a>.</p>
+<h2 id="dropnow"><a aria-hidden="true" tabindex="-1" href="#dropnow"><span class="icon icon-link"></span></a>DropNow</h2>
+<p>DropNow is a free service designed to fix the convenience, privacy, and quality issues of data sharing today. It is available now at <a href="https://dropnow.elguindi.xyz" rel="nofollow">dropnow.elguindi.xyz</a>. Try it out!</p>
+<h3 id="technical-details"><a aria-hidden="true" tabindex="-1" href="#technical-details"><span class="icon icon-link"></span></a>Technical Details</h3>
+<p>DropNow uses a room-type signalling server to enable peer to peer WebRTC connections. A user can create a room, identified by a room name (the string that they input on the homepage of the website). From there, another user can join that room by entering the same room name; there can only be 2 users in one room at a time. The room system is in place to allow for the relaying of messages from peer to the other.</p>
+<pre class="language-go"><code class="language-go"><!-- HTML_TAG_START --><span class="token comment">// main.go</span>
+<span class="token keyword">var</span> rooms <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">*</span>User<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	<span class="token operator">*</span>websocket<span class="token punctuation">.</span>Conn
+    <span class="token operator">...</span>
+	pair <span class="token operator">*</span>User <span class="token comment">// the user's peer</span>
+<span class="token punctuation">&#125;</span><!-- HTML_TAG_END --></code></pre>
+<p>The signalling server handles websocket connections from every user on a new goroutine, when a message is received from a <code>User</code>, it is relayed to the <code>User.pair</code>.</p>
+<p>After the WebRTC connection is made through the signalling server, the signalling server is not used for any data transfer other than for WebRTC purposes (like renegotiation). Nobody sees your data except you and the connected peer.</p>
+<h3 id="technical-limitations-and-solutions"><a aria-hidden="true" tabindex="-1" href="#technical-limitations-and-solutions"><span class="icon icon-link"></span></a>Technical Limitations and Solutions</h3>
+<p>Due to the nature of storing JavaScript blobs on mobile devices, it is not possible to transfer large files (greater than ~300MiB). To download a file, we store the received blobs from WebRTC in an array, then, once all blobs are received, a data URI is generated from the array for the download. This results in the need for the browser to be able to store 2 times the size of the transferred data.</p>
+<pre class="language-js"><code class="language-js"><!-- HTML_TAG_START --><span class="token keyword">let</span> <span class="token literal-property property">data</span><span class="token operator">:</span> ArrayBuffer<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* on data chunk receive */</span>
+data<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>chunkData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* on data save/download */</span>
+<span class="token keyword">const</span> received <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">type</span><span class="token operator">:</span> mime <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+downloadAnchor<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>received<span class="token punctuation">)</span><span class="token punctuation">;</span>
+downloadAnchor<span class="token punctuation">.</span>download <span class="token operator">=</span> filename<span class="token punctuation">;</span>
+downloadAnchor<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><!-- HTML_TAG_END --></code></pre>
+<p>If a better filesystem API comes along in the future, it should theoretically be possible to transfer files of any size, writing directly to non-volatile storage, as opposed to memory.</p>
+<p>For desktop browsers, they have a greater capacity (due to larger RAM size) and have some caching ability to store large blobs. I currently do not see an issue with large file transfers to a desktop browser.</p>
+<p>A current possible solution would consist of desktop or mobile applications to handle the data transfer, writing directly to the disk with a small in-memory buffer. This would mean that the download size is not limited by the memory of the device, but its physical storage.</p></div></div>
+</main>
+
+
+		<script type="module" data-sveltekit-hydrate="jk0r5n">
+		import { set_public_env, start } from "/_app/immutable/start-adf5e024.js";
+
+		set_public_env({});
+
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="jk0r5n"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [2, 3, 6],
+				params: {},
+				routeId: "post/p2p-data-webrtc"
+			}
+		});
+	</script>
+	</body>
+</html>

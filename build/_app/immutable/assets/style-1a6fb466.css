@@ -1,0 +1,1 @@
+:root{--background-primary: white;--font-primary-rgb: 58, 52, 58;--font-primary: rgb(var(--font-primary-rgb));text-rendering:optimizelegibility}*,body{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;background:var(--background-primary);color:var(--font-primary);width:100%;min-height:100vh}
