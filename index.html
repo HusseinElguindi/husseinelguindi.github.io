@@ -9,17 +9,18 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
-        <!-- <script> mermaid.initialize({ startOnLoad: true }); </script> -->
-
 		<meta http-equiv="content-security-policy" content=""><title>Home | Hussein Elguindi</title><meta name="description" content="Software engineering student at the University of Waterloo. Interested in software development and architecture, and mathematics." data-svelte="svelte-1ngi6nz">
-	<link rel="stylesheet" href="/_app/immutable/assets/__layout-e3d9d002.css">
-	<link rel="stylesheet" href="/_app/immutable/assets/style-1a6fb466.css">
-	<link rel="stylesheet" href="/_app/immutable/assets/index-b38600eb.css">
-	<link rel="modulepreload" href="/_app/immutable/start-fa7b2672.js">
-	<link rel="modulepreload" href="/_app/immutable/chunks/index-87ac75c6.js">
-	<link rel="modulepreload" href="/_app/immutable/pages/__layout.svelte-36d14584.js">
-	<link rel="modulepreload" href="/_app/immutable/pages/index.svelte-ef27ac78.js">
+	<link href="./_app/immutable/assets/+layout-1a6fb466.css" rel="stylesheet">
+	<link href="./_app/immutable/assets/+layout-e3d9d002.css" rel="stylesheet">
+	<link href="./_app/immutable/assets/+page-b38600eb.css" rel="stylesheet">
+	<link rel="modulepreload" href="./_app/immutable/start-a3a4e13f.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/index-6e1e08c5.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/singletons-d57c3d50.js">
+	<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-2aa020f1.js">
+	<link rel="modulepreload" href="./_app/immutable/components/pages/(app)/_layout.svelte-0875fd8c.js">
+	<link rel="modulepreload" href="./_app/immutable/components/pages/(app)/_page.svelte-706cc8b3.js">
+	<link rel="modulepreload" href="./_app/immutable/modules/pages/(app)/_page.ts-2b87dd34.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/_page-000ffb04.js">
 	</head>
 	<body>
 		
@@ -38,7 +39,11 @@
 
     <section class="content svelte-pep9wv">
 
-<a href="/post/p2p-data-webrtc" alt="full post/article" class="svelte-5rhdxm"><section class="svelte-5rhdxm"><div class="post-stats svelte-5rhdxm">Aug 17, 2022 </div>
+<a href="/post/vpn-udp-tunnel" alt="full post/article" class="svelte-5rhdxm"><section class="svelte-5rhdxm"><div class="post-stats svelte-5rhdxm">Aug 29, 2022 </div>
+        <h1 class="svelte-5rhdxm">Securely Tunneling WireGuard VPN's UDP Traffic</h1>
+
+        <p>It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol.</p></section>
+</a><a href="/post/p2p-data-webrtc" alt="full post/article" class="svelte-5rhdxm"><section class="svelte-5rhdxm"><div class="post-stats svelte-5rhdxm">Aug 17, 2022 </div>
         <h1 class="svelte-5rhdxm">DropNow: Peer to Peer Data Sharing Through WebRTC</h1>
 
         <p>Quite often we need to transfer files between devices. Unfortunately, even in the modern age of technology, we still have trouble doing this securely and conveniently. We explore the implementation of WebRTC in a web application to enable peer to peer data transfer.</p></section>
@@ -50,26 +55,28 @@
 </main>
 
 
-		<script type="module" data-sveltekit-hydrate="1aawrp8">
-		import { set_public_env, start } from "/_app/immutable/start-fa7b2672.js";
+		<script type="module" data-sveltekit-hydrate="qxraaf">
+		import { set_public_env, start } from "./_app/immutable/start-a3a4e13f.js";
 
 		set_public_env({});
 
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="1aawrp8"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="qxraaf"]').parentNode,
 			paths: {"base":"","assets":""},
-			session: {},
 			route: true,
 			spa: false,
 			trailing_slash: "never",
 			hydrate: {
 				status: 200,
 				error: null,
-				nodes: [0, 4],
+				node_ids: [0, 2, 4],
 				params: {},
-				routeId: ""
+				routeId: "(app)",
+				data: (function(a){return [a,a,a]}(null)),
+				errors: null
 			}
 		});
-	</script><script type="application/json" sveltekit:data-type="data" sveltekit:data-url="/api/posts.json">{"status":200,"statusText":"","headers":{"content-type":"application/json; charset=utf-8"},"body":"[{\"meta\":{\"title\":\"DropNow: Peer to Peer Data Sharing Through WebRTC\",\"date\":\"Aug 17, 2022\",\"readmin\":0,\"intro\":\"Quite often we need to transfer files between devices. Unfortunately, even in the modern age of technology, we still have trouble doing this securely and conveniently. We explore the implementation of WebRTC in a web application to enable peer to peer data transfer.\"},\"path\":\"/post/p2p-data-webrtc\"},{\"meta\":{\"title\":\"My LaTeX Note Taking Journey Through Calculus I\",\"date\":\"Aug 5, 2022\",\"readmin\":5,\"intro\":\"Throughout the course of my first Calculus course (grade 12 AP Calculus), I decided to write my notes neatly in LaTeX for future reference. That sparked a curiosity for the document preparation system, which I value greatly.\"},\"path\":\"/post/latex-note-calc-i\"}]"}</script>
+	</script>
+	<script type="application/json" sveltekit:data-type="data" sveltekit:data-url="/api/posts.json">{"status":200,"statusText":"","headers":{"content-type":"text/plain;charset=UTF-8"},"body":"[{\"meta\":{\"title\":\"Securely Tunneling WireGuard VPN's UDP Traffic\",\"date\":\"Aug 29, 2022\",\"readmin\":0,\"intro\":\"It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol.\"},\"path\":\"/post/vpn-udp-tunnel\"},{\"meta\":{\"title\":\"DropNow: Peer to Peer Data Sharing Through WebRTC\",\"date\":\"Aug 17, 2022\",\"readmin\":0,\"intro\":\"Quite often we need to transfer files between devices. Unfortunately, even in the modern age of technology, we still have trouble doing this securely and conveniently. We explore the implementation of WebRTC in a web application to enable peer to peer data transfer.\"},\"path\":\"/post/p2p-data-webrtc\"},{\"meta\":{\"title\":\"My LaTeX Note Taking Journey Through Calculus I\",\"date\":\"Aug 5, 2022\",\"readmin\":5,\"intro\":\"Throughout the course of my first Calculus course (grade 12 AP Calculus), I decided to write my notes neatly in LaTeX for future reference. That sparked a curiosity for the document preparation system, which I value greatly.\"},\"path\":\"/post/latex-note-calc-i\"}]"}</script>
 	</body>
 </html>

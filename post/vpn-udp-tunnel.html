@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+		<meta http-equiv="content-security-policy" content=""><title>Securely Tunneling WireGuard VPN's UDP Traffic | Hussein Elguindi</title><meta name="description" content="It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol." data-svelte="svelte-24fe3a">
+	<link href="../_app/immutable/assets/+layout-1a6fb466.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/+layout-8f6f3192.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/_post-7b3dbd0a.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/InlineCarousel-634dfb8f.css" rel="stylesheet">
+	<link rel="modulepreload" href="../_app/immutable/start-a3a4e13f.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/index-6e1e08c5.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/singletons-d57c3d50.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-2aa020f1.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/post/_layout.svelte-f1520730.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/post/vpn-udp-tunnel/_page.md-9ca1b940.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/_post-3c519d6a.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/InlineCarousel-2b77edaf.js">
+	</head>
+	<body>
+		
+
+
+
+
+<main class="svelte-k7v9ua"><div class="svelte-k7v9ua"><section class="header svelte-k7v9ua"><div class="svelte-k7v9ua"><a href="/" class="svelte-k7v9ua">◀ all articles</a></div>
+            <div class="svelte-k7v9ua">Aug 29, 2022 </div></section>
+
+        <h1 class="title svelte-k7v9ua">Securely Tunneling WireGuard VPN's UDP Traffic</h1>
+
+        <div class="content svelte-k7v9ua"><p style="font-style: italic;">It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol.</p>
+            <p>I was recently faced with an issue of being unable to establish a VPN connection in a country that used Deep Packet Inspection (DPI) to examine datagrams and their common patterns. </p>
+<p>My project started as a simple chat about VPN’s and how simply one could host their own at home, through the use of a small computer (such as a Raspberry Pi). I set up a VPN at home that very evening with an old Raspberry Pi, using a dynamic DNS service (my ISP did not provide a static IP) and a port-forward on my router (to make it reachable over the internet).</p>
+<p>There was just one problem, I was traveling soon and I knew VPNs were hard to connect to, due to the use of DPI, at my destination. I set out to find a way to obfuscate the data, such as using a stunnel (tunnel over SSL), but that was slow and only worked with TCP. I opted not to use a VPN over TCP since OpenVPN is a very large codebase and is quite a bit slower, compared to WireGuard. </p>
+
+<h2 id="proxy-concept"><a aria-hidden="true" tabindex="-1" href="#proxy-concept"><span class="icon icon-link"></span></a>Proxy Concept</h2>
+<p>What if there was a proxy program that could intercept the datagrams, encrypt their data, then send it to a server which is running a similar proxy program to decrypt that data and send it to where it needs to be.</p>
+<h3 id="typical-wireguard-flow"><a aria-hidden="true" tabindex="-1" href="#typical-wireguard-flow"><span class="icon icon-link"></span></a>Typical WireGuard Flow</h3>
+<p><code>A</code> and <code>D</code> are WireGuard peers.</p>
+<p><img src="/images/post/vpn-udp-tunnel/wg-flow.svg" alt="WireGuard tunnel proxy flow"></p>
+<h3 id="proxied-wireguard-flow"><a aria-hidden="true" tabindex="-1" href="#proxied-wireguard-flow"><span class="icon icon-link"></span></a>Proxied WireGuard Flow</h3>
+<p><code>A</code> and <code>D</code> are WireGuard peers, they do not communicate directly over the internet, only the proxy servers communicate remotely with the encrypted data. <code>B</code> and <code>C</code> are the proxy programs running a server on each machine. </p>
+<div class="inline-carousel  overflow-0-55 svelte-1x9hlt8"><img alt="WireGuard tunnel proxy flow" src="/images/post/vpn-udp-tunnel/wg-tunnel-flow.svg"></div>
+
+
+
+
+<p>When <code>B</code> and <code>C</code> receive data from <code>A</code> and <code>D</code>, respectively, they encrypt and send it to each other, <code>C</code> and <code>B</code>, respectively.</p>
+<p>When <code>B</code> and <code>C</code> receive data from each other, they decrypt it and send it to their local peers, <code>A</code> and <code>D</code>, respectively.</p>
+<h2 id="implementation"><a aria-hidden="true" tabindex="-1" href="#implementation"><span class="icon icon-link"></span></a>Implementation</h2>
+<p>I loosely say the term encrypt as a means to hide the VPN data from any packet inspection. WireGuard has its own cryptography implementations so we do not need to secure our data. We just need hide the WireGuard protocol pattern (e.g. type bits and reserved bits that are prepended to every WireGuard message) from anything that may be inspecting the data.</p>
+<h3 id="server"><a aria-hidden="true" tabindex="-1" href="#server"><span class="icon icon-link"></span></a>Server</h3>
+<p>Since the server cannot know the client’s address beforehand, it awaits a secret message to set its remote peer. Both the client and server know this secret message.</p>
+<p>The server’s UDP handler flow looks like this:</p>
+<pre class="language-text"><code class="language-text"><!-- HTML_TAG_START -->When a UDP datagram is received:
+    If it was sent from the locally running WireGuard server:
+        Encrypt and send it to the client
+
+    If it is the secret message:
+        Set the client to the sender
+        
+    If it was sent from the client:
+        Decrypt and send it to the locally running WireGuard peer<!-- HTML_TAG_END --></code></pre>
+<h3 id="client"><a aria-hidden="true" tabindex="-1" href="#client"><span class="icon icon-link"></span></a>Client</h3>
+<p>The client knows the server’s address beforehand, so there is no need to negotiate it.</p>
+<p>The client’s UDP handler flow looks like this:</p>
+<pre class="language-text"><code class="language-text"><!-- HTML_TAG_START -->When a UDP datagram is received:
+    If it was sent from the locally running WireGuard server:
+        Encrypt and send it to the server
+        
+    If it was sent from the server:
+        Decrypt and send it to the locally running WireGuard peer<!-- HTML_TAG_END --></code></pre>
+<h2 id="wireguard-configurations"><a aria-hidden="true" tabindex="-1" href="#wireguard-configurations"><span class="icon icon-link"></span></a>WireGuard Configurations</h2>
+<h3 id="server-1"><a aria-hidden="true" tabindex="-1" href="#server-1"><span class="icon icon-link"></span></a>Server</h3>
+<pre class="language-yaml"><code class="language-yaml"><!-- HTML_TAG_START --><span class="token comment"># wg0.conf</span>
+<span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
+PrivateKey = REDACTED
+Address = 10.55.33.1/32<span class="token punctuation">,</span>fd11<span class="token punctuation">:</span>5ee<span class="token punctuation">:</span>bad<span class="token punctuation">:</span>c0de<span class="token punctuation">:</span><span class="token punctuation">:</span>1/64 <span class="token comment"># it is important to make the IP subnet mask /32 so it is one IP</span>
+MTU = 1420
+ListenPort = 51820
+<span class="token comment">### begin client1 ###</span>
+<span class="token punctuation">[</span>Peer<span class="token punctuation">]</span>
+PublicKey = REDACTED
+PresharedKey = REDACTED
+Endpoint = 127.0.0.1<span class="token punctuation">:</span><span class="token number">51821</span> <span class="token comment"># the local proxy server is running on this address</span>
+AllowedIPs = 10.55.33.2/32<span class="token punctuation">,</span>fd11<span class="token punctuation">:</span>5ee<span class="token punctuation">:</span>bad<span class="token punctuation">:</span>c0de<span class="token punctuation">:</span><span class="token punctuation">:</span>2/128
+<span class="token comment">### end client1 ###</span><!-- HTML_TAG_END --></code></pre>
+<h3 id="client-1"><a aria-hidden="true" tabindex="-1" href="#client-1"><span class="icon icon-link"></span></a>Client</h3>
+<pre class="language-yaml"><code class="language-yaml"><!-- HTML_TAG_START --><span class="token comment"># client1.conf</span>
+<span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
+PrivateKey = REDACTED
+ListenPort = 51820
+Address = 10.55.33.2/24<span class="token punctuation">,</span> fd11<span class="token punctuation">:</span>5ee<span class="token punctuation">:</span>bad<span class="token punctuation">:</span>c0de<span class="token punctuation">:</span><span class="token punctuation">:</span>2/64
+DNS = 1.1.1.1<span class="token punctuation">,</span> 1.0.0.1
+MTU = 1420
+
+<span class="token punctuation">[</span>Peer<span class="token punctuation">]</span>
+PublicKey = REDACTED
+PresharedKey = REDACTED
+AllowedIPs = 0.0.0.0/0
+DisallowedIPs = 127.0.0.1/32<span class="token punctuation">,</span> the.remote.server.address/32 <span class="token comment"># localhost and the remote server address</span>
+Endpoint = 127.0.0.1<span class="token punctuation">:</span><span class="token number">51821</span> <span class="token comment"># the local proxy server is running on this address</span><!-- HTML_TAG_END --></code></pre>
+<p>You might notice that <code>DisallowedIPs</code> is not a valid WireGuard field. It’s purpose is to allow some IPs to not be routed through WireGuard. Using <code>AllowedIPs</code> and <code>DisallowedIPs</code> on this <a href="https://www.procustodibus.com/blog/2021/03/wireguard-allowedips-calculator/" rel="nofollow">allowed IP calculator</a> will give you a valid <code>AllowedIPs</code> field.</p>
+<h2 id="ufw-server-configuration"><a aria-hidden="true" tabindex="-1" href="#ufw-server-configuration"><span class="icon icon-link"></span></a>UFW Server Configuration</h2>
+<p>If you are using <code>ufw</code> on your server which also runs a WireGuard peer, you should run the following to get the expected behaviour (you may need <code>sudo</code> if you are not root).</p>
+<pre class="language-bash"><code class="language-bash"><!-- HTML_TAG_START -->ufw allow <span class="token number">51820</span>/udp <span class="token comment"># not required unless you also want to connect without the proxy tunnel</span>
+ufw allow <span class="token number">51821</span>/udp <span class="token comment"># 51821 is the port that your proxy server runs on</span>
+
+ufw route allow <span class="token keyword">in</span> on wg0 out on eth0
+ufw route allow <span class="token keyword">in</span> on eth0 out on wg0<!-- HTML_TAG_END --></code></pre>
+<h2 id="conclusion"><a aria-hidden="true" tabindex="-1" href="#conclusion"><span class="icon icon-link"></span></a>Conclusion</h2>
+<p>With the above concepts and configurations, one should be able to hide WireGuard traffic from any DPI and connect to their VPN. It is simple to create such UDP-forwarders with encrypt/decrypt capabilities and any custom obfuscation features that a developer wishes to implement. The resulting traffic appears to be random data with little to no identifying features. Additionally, added overhead for each datagram is up to the developer’s implementation of encryption and/or obfuscation.</p></div></div>
+</main>
+
+
+		<script type="module" data-sveltekit-hydrate="1u28l5b">
+		import { set_public_env, start } from "../_app/immutable/start-a3a4e13f.js";
+
+		set_public_env({});
+
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="1u28l5b"]').parentNode,
+			paths: {"base":"","assets":""},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				node_ids: [0, 3, 7],
+				params: {},
+				routeId: "post/vpn-udp-tunnel",
+				data: (function(a){return [a,a,a]}(null)),
+				errors: null
+			}
+		});
+	</script>
+	
+	</body>
+</html>

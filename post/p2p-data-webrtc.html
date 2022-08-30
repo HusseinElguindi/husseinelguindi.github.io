@@ -9,19 +9,17 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
-        <!-- <script> mermaid.initialize({ startOnLoad: true }); </script> -->
-
 		<meta http-equiv="content-security-policy" content=""><title>DropNow: Peer to Peer Data Sharing Through WebRTC | Hussein Elguindi</title><meta name="description" content="Quite often we need to transfer files between devices. Unfortunately, even in the modern age of technology, we still have trouble doing this securely and conveniently. We explore the implementation of WebRTC in a web application to enable peer to peer data transfer." data-svelte="svelte-24fe3a">
-	<link rel="stylesheet" href="/_app/immutable/assets/__layout@reset-8f6f3192.css">
-	<link rel="stylesheet" href="/_app/immutable/assets/style-1a6fb466.css">
-	<link rel="stylesheet" href="/_app/immutable/assets/_post-7b3dbd0a.css">
-	<link rel="modulepreload" href="/_app/immutable/start-fa7b2672.js">
-	<link rel="modulepreload" href="/_app/immutable/chunks/index-87ac75c6.js">
-	<link rel="modulepreload" href="/_app/immutable/pages/__layout-reset.svelte-8aec737b.js">
-	<link rel="modulepreload" href="/_app/immutable/pages/post/__layout@reset.svelte-a3a9bbe6.js">
-	<link rel="modulepreload" href="/_app/immutable/pages/post/p2p-data-webrtc.md-503855e8.js">
-	<link rel="modulepreload" href="/_app/immutable/chunks/_post-82eddfc5.js">
+	<link href="../_app/immutable/assets/+layout-1a6fb466.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/+layout-8f6f3192.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/_post-7b3dbd0a.css" rel="stylesheet">
+	<link rel="modulepreload" href="../_app/immutable/start-a3a4e13f.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/index-6e1e08c5.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/singletons-d57c3d50.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-2aa020f1.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/post/_layout.svelte-f1520730.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/post/p2p-data-webrtc/_page.md-ce82f232.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/_post-3c519d6a.js">
 	</head>
 	<body>
 		
@@ -73,25 +71,27 @@ downloadAnchor<span class="token punctuation">.</span><span class="token functio
 
 
 		<script type="module" data-sveltekit-hydrate="1un8e7v">
-		import { set_public_env, start } from "/_app/immutable/start-fa7b2672.js";
+		import { set_public_env, start } from "../_app/immutable/start-a3a4e13f.js";
 
 		set_public_env({});
 
 		start({
 			target: document.querySelector('[data-sveltekit-hydrate="1un8e7v"]').parentNode,
 			paths: {"base":"","assets":""},
-			session: {},
 			route: true,
 			spa: false,
 			trailing_slash: "never",
 			hydrate: {
 				status: 200,
 				error: null,
-				nodes: [2, 3, 6],
+				node_ids: [0, 3, 6],
 				params: {},
-				routeId: "post/p2p-data-webrtc"
+				routeId: "post/p2p-data-webrtc",
+				data: (function(a){return [a,a,a]}(null)),
+				errors: null
 			}
 		});
 	</script>
+	
 	</body>
 </html>
