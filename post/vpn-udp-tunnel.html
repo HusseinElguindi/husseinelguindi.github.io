@@ -2,25 +2,26 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="../favicon.png" />
+		<!-- <link rel="icon" href="../favicon.png" /> -->
+		<link rel="icon" href="../favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> -->
 
 		<meta http-equiv="content-security-policy" content=""><title>Securely Tunneling WireGuard VPN's UDP Traffic | Hussein Elguindi</title><meta name="description" content="It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol." data-svelte="svelte-24fe3a">
-	<link href="../_app/immutable/assets/+layout-1a6fb466.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/+layout-bc5b40bc.css" rel="stylesheet">
 	<link href="../_app/immutable/assets/+layout-8f6f3192.css" rel="stylesheet">
-	<link href="../_app/immutable/assets/_post-7b3dbd0a.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/_post-143ed7e8.css" rel="stylesheet">
 	<link href="../_app/immutable/assets/InlineCarousel-634dfb8f.css" rel="stylesheet">
-	<link rel="modulepreload" href="../_app/immutable/start-230ea239.js">
+	<link rel="modulepreload" href="../_app/immutable/start-4adee8a6.js">
 	<link rel="modulepreload" href="../_app/immutable/chunks/index-7c3592c8.js">
-	<link rel="modulepreload" href="../_app/immutable/chunks/singletons-5b9ab3af.js">
-	<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-95e98836.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/singletons-40991b74.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-4a2047cb.js">
 	<link rel="modulepreload" href="../_app/immutable/components/pages/post/_layout.svelte-776ba971.js">
-	<link rel="modulepreload" href="../_app/immutable/components/pages/post/vpn-udp-tunnel/_page.md-2c3c13fb.js">
-	<link rel="modulepreload" href="../_app/immutable/chunks/_post-a4d7dfe4.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/post/vpn-udp-tunnel/_page.md-0d3c6445.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/_post-dbe8b93d.js">
 	<link rel="modulepreload" href="../_app/immutable/chunks/InlineCarousel-ec809923.js">
 	</head>
 	<body>
@@ -29,12 +30,12 @@
 
 
 
-<main class="svelte-k7v9ua"><div class="svelte-k7v9ua"><section class="header svelte-k7v9ua"><div class="svelte-k7v9ua"><a href="/" class="svelte-k7v9ua">◀ all articles</a></div>
-            <div class="svelte-k7v9ua">Aug 29, 2022 </div></section>
+<main class="svelte-4huwg6"><div class="svelte-4huwg6"><section class="header svelte-4huwg6"><div class="svelte-4huwg6"><a href="/" class="svelte-4huwg6">◀ all articles</a></div>
+            <div class="svelte-4huwg6">Aug 29, 2022 </div></section>
 
-        <h1 class="title svelte-k7v9ua">Securely Tunneling WireGuard VPN's UDP Traffic</h1>
+        <h1 class="title svelte-4huwg6">Securely Tunneling WireGuard VPN's UDP Traffic</h1>
 
-        <div class="content svelte-k7v9ua"><p style="font-style: italic;">It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol.</p>
+        <div class="content svelte-4huwg6"><p style="font-style: italic;">It is sometimes not possible to establish a VPN connection due to a country or an organization's restrictions and their counter-measures. This article outlines how UDP traffic can be routed through a proxy to encrypt data, enabling the connection of a UDP-based VPN, such as those using the WireGuard protocol.</p>
             <p>I was recently faced with an issue of being unable to establish a VPN connection in a country that used Deep Packet Inspection (DPI) to examine datagrams and their common patterns. </p>
 <p>My project started as a simple chat about VPN’s and how simply one could host their own at home, through the use of a small computer (such as a Raspberry Pi). I set up a VPN at home that very evening with an old Raspberry Pi, using a dynamic DNS service (my ISP did not provide a static IP) and a port-forward on my router (to make it reachable over the internet).</p>
 <p>There was just one problem, I was traveling soon and I knew VPNs were hard to connect to, due to the use of DPI, at my destination. I set out to find a way to obfuscate the data, such as using a stunnel (tunnel over SSL), but that was slow and only worked with TCP. I opted not to use a VPN over TCP since OpenVPN is a very large codebase and is quite a bit slower, compared to WireGuard. </p>
@@ -119,13 +120,13 @@ ufw route allow <span class="token keyword">in</span> on eth0 out on wg0<!-- HTM
 </main>
 
 
-		<script type="module" data-sveltekit-hydrate="1u28l5b">
-		import { set_public_env, start } from "../_app/immutable/start-230ea239.js";
+		<script type="module" data-sveltekit-hydrate="17isosv">
+		import { set_public_env, start } from "../_app/immutable/start-4adee8a6.js";
 
 		set_public_env({});
 
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="1u28l5b"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="17isosv"]').parentNode,
 			paths: {"base":"","assets":""},
 			route: true,
 			spa: false,
