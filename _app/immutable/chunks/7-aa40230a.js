@@ -1,1 +1,0 @@
-import{default as e}from"../components/pages/post/vpn-udp-tunnel/_page.md-0d3c6445.js";import"./index-7c3592c8.js";import"./_post-dbe8b93d.js";import"./InlineCarousel-ec809923.js";export{e as component};
